@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="蓝调，spring boot" />
+  <meta name="keywords" content="spring," />
 
 
 
@@ -79,16 +79,34 @@
 
 
 
-<meta name="description" content="只做对的，不做重复的">
-<meta property="og:type" content="website">
-<meta property="og:title" content="小蓝日志">
-<meta property="og:url" content="http://blog.dalaowen.com/index.html">
+<meta name="description" content="spring 容器就是一个工厂，而bean 是工厂里的每一个产品，而这个工厂生产什么样的产品，是依赖于配置文件的声明。一、注册的方式有两种：1、xml配置文件 2、java based 配置">
+<meta name="keywords" content="spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring Bean 详解">
+<meta property="og:url" content="http://blog.dalaowen.com/2018/05/12/spring-Bean-详解/index.html">
 <meta property="og:site_name" content="小蓝日志">
-<meta property="og:description" content="只做对的，不做重复的">
+<meta property="og:description" content="spring 容器就是一个工厂，而bean 是工厂里的每一个产品，而这个工厂生产什么样的产品，是依赖于配置文件的声明。一、注册的方式有两种：1、xml配置文件 2、java based 配置">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708164-e1f343c8a58f01f1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708164-5a03810db35e4c56.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708164-d20b65ba1e61fbe8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708164-9b6b79b2ea9788d5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708164-82229a901f237d8e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708164-3c8056520b7bb566.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708164-8bc40362761ede66.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708164-624df5ff68c465c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708164-fd653a387f59c379.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708164-fbe965f6d03b00c4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708164-735e4c5cdbb34bf1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708164-3be5979c56c2c48c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708164-b0171c4fd9063566.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708164-84de0aea2169c7ea.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708164-b791098d81c89f50.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-05-12T05:45:56.176Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="小蓝日志">
-<meta name="twitter:description" content="只做对的，不做重复的">
+<meta name="twitter:title" content="spring Bean 详解">
+<meta name="twitter:description" content="spring 容器就是一个工厂，而bean 是工厂里的每一个产品，而这个工厂生产什么样的产品，是依赖于配置文件的声明。一、注册的方式有两种：1、xml配置文件 2、java based 配置">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1708164-e1f343c8a58f01f1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -118,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.dalaowen.com/"/>
+  <link rel="canonical" href="http://blog.dalaowen.com/2018/05/12/spring-Bean-详解/"/>
 
 
 
 
 
-  <title>小蓝日志</title>
+  <title>spring Bean 详解 | 小蓝日志</title>
   
 
 
@@ -143,8 +161,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -247,9 +264,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -279,9 +296,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/12/spring-Bean-详解/" itemprop="url">spring Bean 详解</a></h1>
+          <h1 class="post-title" itemprop="name headline">spring Bean 详解</h1>
         
 
         <div class="post-meta">
@@ -364,18 +379,28 @@
       
 
       
-        
-          <p>spring 容器就是一个工厂，而bean 是工厂里的每一个产品，而这个工厂生产什么样的产品，是依赖于配置文件的声明。<br>一、<br>注册的方式有两种：<br>1、xml配置文件</p>
+        <p>spring 容器就是一个工厂，而bean 是工厂里的每一个产品，而这个工厂生产什么样的产品，是依赖于配置文件的声明。<br>一、<br>注册的方式有两种：<br>1、xml配置文件</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1708164-e1f343c8a58f01f1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="xml配置"><br>2、java based 配置</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1708164-5a03810db35e4c56.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="java based"></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/12/spring-Bean-详解/" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+<a id="more"></a>
+<p>二、Bean的命名规则<br>默认，spring是以@Bean声明的方法名作为bean的名称，spring容器集中管理Bean的实例化，Bean实例可以通过BeanFactory的getBean(string beanName) 方法得到。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708164-d20b65ba1e61fbe8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Bean 注解"></p>
+<p>从上图可以看出，<br>name:用于为bean指定别名，如果需要为Bean实例指定多个别名，可以在name 属性中使用逗号，冒号和空格来分隔多个别名<br>autowire:是否按名称或是类型来注入依赖的对象<br>initMethod: 在初始化完后，调用的方法<br>destroyMethod: bean在销毁时调用的方法<br>三、Bean的作用域<br>通过@Scope来声明</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708164-9b6b79b2ea9788d5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Scope 示例"><br>1、singleton:单例模式<br>2、Prototype:原型模式<br>3、request:对于 每次http 请求，bean都会产生一个新的实例，只有在web 应用中才会生效<br>4、session 对于 每次HttpSession时会产生一个新的实例，只有在web 应用中才会生效<br>5、global session ,只有在portlet context中有效<br>比较常用到的是singleton和prototype，java在创建实例，要进行内存申请，销毁实例时，要垃圾回收，这些都会导致系统开销的增加，因此prototype作用域的bean在创建、销毁代价会比较大，而singleton的bean实例，一旦创建，就可以重复使用<br>四、Bean的生命周期<br>1、@Bean注解的内容：通过配置initMethod和destroyMethod方法<br>2、bean的接口：BeanNameAware、BeanFactoryAware、InitializingBean和DiposableBean这些接口，@PostConstruct,@PreDestroy<br>测试如下<br><img src="http://upload-images.jianshu.io/upload_images/1708164-82229a901f237d8e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="TestClass"></p>
+<p>bean的声明：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708164-3c8056520b7bb566.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="TestClass Bean声明"></p>
+<p>日志输出：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708164-8bc40362761ede66.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="日志输出1"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708164-624df5ff68c465c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="日志输出2"></p>
+<p>我们来看下Bean的初始化是怎么进行的</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708164-fd653a387f59c379.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="initializeBean 方法"><br>1、是调用 实现了相应Aware接口的方法</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708164-fbe965f6d03b00c4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Aware接口方法"></p>
+<p>2、调用Bean实例的后置处理器BeanPostProcessor</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708164-735e4c5cdbb34bf1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="BeanPostProcessor接口"><br>这里有两个方法 ，Before和After….,分别在initMethod方法前后被调用<br><img src="http://upload-images.jianshu.io/upload_images/1708164-3be5979c56c2c48c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="后置处理方法"><br>3、调用Bean实例的InitializingBean接口和@Bean的initMethod，InitializingBean接口是优于initMethod的</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708164-b0171c4fd9063566.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="InitMethod"><br>4、实例销毁</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708164-84de0aea2169c7ea.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="destroy"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708164-b791098d81c89f50.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="调用堆栈"></p>
+
       
     </div>
     
@@ -390,14 +415,20 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/spring/" rel="tag"># spring</a>
+          
+        </div>
+      
+
+      
+      
+      
 
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -407,10 +438,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -418,6 +450,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -637,6 +673,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
