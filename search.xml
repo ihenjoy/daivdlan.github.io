@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[spring Bean 详解]]></title>
+    <url>%2F2018%2F05%2F12%2Fspring-Bean-%E8%AF%A6%E8%A7%A3%2F</url>
+    <content type="text"><![CDATA[spring 容器就是一个工厂，而bean 是工厂里的每一个产品，而这个工厂生产什么样的产品，是依赖于配置文件的声明。一、注册的方式有两种：1、xml配置文件 2、java based 配置 二、Bean的命名规则默认，spring是以@Bean声明的方法名作为bean的名称，spring容器集中管理Bean的实例化，Bean实例可以通过BeanFactory的getBean(string beanName) 方法得到。 从上图可以看出，name:用于为bean指定别名，如果需要为Bean实例指定多个别名，可以在name 属性中使用逗号，冒号和空格来分隔多个别名autowire:是否按名称或是类型来注入依赖的对象initMethod: 在初始化完后，调用的方法destroyMethod: bean在销毁时调用的方法三、Bean的作用域通过@Scope来声明 1、singleton:单例模式2、Prototype:原型模式3、request:对于 每次http 请求，bean都会产生一个新的实例，只有在web 应用中才会生效4、session 对于 每次HttpSession时会产生一个新的实例，只有在web 应用中才会生效5、global session ,只有在portlet context中有效比较常用到的是singleton和prototype，java在创建实例，要进行内存申请，销毁实例时，要垃圾回收，这些都会导致系统开销的增加，因此prototype作用域的bean在创建、销毁代价会比较大，而singleton的bean实例，一旦创建，就可以重复使用四、Bean的生命周期1、@Bean注解的内容：通过配置initMethod和destroyMethod方法2、bean的接口：BeanNameAware、BeanFactoryAware、InitializingBean和DiposableBean这些接口，@PostConstruct,@PreDestroy测试如下 bean的声明： 日志输出： 我们来看下Bean的初始化是怎么进行的 1、是调用 实现了相应Aware接口的方法 2、调用Bean实例的后置处理器BeanPostProcessor 这里有两个方法 ，Before和After….,分别在initMethod方法前后被调用3、调用Bean实例的InitializingBean接口和@Bean的initMethod，InitializingBean接口是优于initMethod的 4、实例销毁]]></content>
+      <categories>
+        <category>技术</category>
+        <category>spring framework</category>
+      </categories>
+      <tags>
+        <tag>spring</tag>
+      </tags>
+  </entry>
+</search>
